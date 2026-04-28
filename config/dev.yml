@@ -1,0 +1,10 @@
+environment_name: dev
+workspace_host: https://adb-DEV-WORKSPACE.azuredatabricks.net
+catalog: main
+schema: dab_template_dev
+warehouse_id: REPLACE_DEV_WAREHOUSE_ID
+owner_email: replace.me@company.com
+default_tags:
+  environment: dev
+  owner_team: data-engineering
+  cost_center: platform

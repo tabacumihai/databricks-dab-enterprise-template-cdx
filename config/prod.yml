@@ -1,0 +1,11 @@
+environment_name: prod
+workspace_host: https://adb-PROD-WORKSPACE.azuredatabricks.net
+catalog: main
+schema: dab_template_prod
+warehouse_id: REPLACE_PROD_WAREHOUSE_ID
+owner_email: replace.me@company.com
+service_principal: 00000000-0000-0000-0000-000000000000
+default_tags:
+  environment: prod
+  owner_team: data-engineering
+  cost_center: platform

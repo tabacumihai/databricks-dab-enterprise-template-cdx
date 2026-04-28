@@ -1,0 +1,13 @@
+name: deploy-test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-test:
+    uses: ./.github/workflows/reusable-deploy.yml
+    with:
+      target: test
+    secrets:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}

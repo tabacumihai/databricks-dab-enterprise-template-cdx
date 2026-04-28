@@ -1,0 +1,10 @@
+environment_name: test
+workspace_host: https://adb-TEST-WORKSPACE.azuredatabricks.net
+catalog: main
+schema: dab_template_test
+warehouse_id: REPLACE_TEST_WAREHOUSE_ID
+owner_email: replace.me@company.com
+default_tags:
+  environment: test
+  owner_team: data-engineering
+  cost_center: platform
