@@ -1,0 +1,13 @@
+name: deploy-prod
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-prod:
+    uses: ./.github/workflows/reusable-deploy.yml
+    with:
+      target: prod
+    secrets:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}

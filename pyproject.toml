@@ -1,1 +1,45 @@
-# pyproject config
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "platform-core"
+version = "0.1.0"
+description = "Shared Python utilities for Databricks DAB enterprise template"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Data Engineering Team", email = "data.engineering@company.com" }
+]
+dependencies = []
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# =========================
+# PYTEST
+# =========================
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-q"
+
+# =========================
+# RUFF (lint)
+# =========================
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+# =========================
+# BLACK (format)
+# =========================
+[tool.black]
+line-length = 100
+target-version = ["py311"]

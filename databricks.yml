@@ -1,1 +1,67 @@
-# bundle config placeholder
+bundle:
+  name: databricks-dab-enterprise-template
+
+include:
+  - resources/jobs/*.yml
+  - resources/pipelines/*.yml
+  - resources/dashboards/*.yml
+  - resources/permissions/*.yml
+
+variables:
+  catalog:
+    description: Unity Catalog catalog name
+    default: main
+
+  schema:
+    description: Target schema name
+    default: dab_template
+
+  warehouse_id:
+    description: SQL warehouse ID used by dashboards or SQL tasks
+    default: ""
+
+  owner_email:
+    description: Primary owner of deployed resources
+    default: "replace.me@company.com"
+
+  prod_service_principal:
+    description: Optional service principal application ID for prod
+    default: ""
+
+targets:
+  dev:
+    default: true
+    mode: development
+    workspace:
+      host: https://adb-DEV-WORKSPACE.azuredatabricks.net
+      root_path: ~/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: main
+      schema: dab_template_dev
+      warehouse_id: "REPLACE_DEV_WAREHOUSE_ID"
+      owner_email: "replace.me@company.com"
+
+  test:
+    mode: production
+    workspace:
+      host: https://adb-TEST-WORKSPACE.azuredatabricks.net
+      root_path: /Shared/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: main
+      schema: dab_template_test
+      warehouse_id: "REPLACE_TEST_WAREHOUSE_ID"
+      owner_email: "replace.me@company.com"
+
+  prod:
+    mode: production
+    workspace:
+      host: https://adb-PROD-WORKSPACE.azuredatabricks.net
+      root_path: /Shared/.bundle/${bundle.name}/${bundle.target}
+    run_as:
+      service_principal_name: ${var.prod_service_principal}
+    variables:
+      catalog: main
+      schema: dab_template_prod
+      warehouse_id: "REPLACE_PROD_WAREHOUSE_ID"
+      owner_email: "replace.me@company.com"
+      prod_service_principal: "00000000-0000-0000-0000-000000000000"

@@ -1,1 +1,20 @@
-# ignore rules
+# ============================================
+# Databricks CLI configuration template
+# DO NOT COMMIT REAL TOKENS
+# ============================================
+
+[DEFAULT]
+host = https://adb-DEV-WORKSPACE.azuredatabricks.net
+token = dapiREPLACE_ME
+
+[DEV]
+host = https://adb-DEV-WORKSPACE.azuredatabricks.net
+token = dapiREPLACE_ME
+
+[TEST]
+host = https://adb-TEST-WORKSPACE.azuredatabricks.net
+token = dapiREPLACE_ME
+
+[PROD]
+host = https://adb-PROD-WORKSPACE.azuredatabricks.net
+token = dapiREPLACE_ME

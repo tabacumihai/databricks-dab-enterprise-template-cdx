@@ -1,0 +1,28 @@
+# ------------------------------------------------------------------------------
+# CODEOWNERS
+# Replace the example org/team names with your real GitHub organization teams.
+# ------------------------------------------------------------------------------
+
+# Global fallback owner
+*                                           @your-org/data-platform-admins
+
+# Repository root and deployment model
+/databricks.yml                             @your-org/data-platform-admins
+/README.md                                  @your-org/data-platform-admins
+/README_ENTERPRISE.md                       @your-org/data-platform-admins
+/Makefile                                   @your-org/data-platform-admins
+
+# CI/CD and governance
+/.github/**                                 @your-org/platform-engineering @your-org/data-platform-admins
+
+# Environment configs and documentation
+/config/**                                  @your-org/data-platform-admins
+/docs/**                                    @your-org/data-platform-admins
+
+# Databricks resources
+/resources/**                               @your-org/data-engineering-leads @your-org/data-platform-admins
+
+# Notebooks and shared Python code
+/notebooks/**                               @your-org/data-engineering
+/src/**                                     @your-org/data-engineering
+/tests/**                                   @your-org/data-engineering

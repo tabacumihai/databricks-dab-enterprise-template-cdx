@@ -1,0 +1,11 @@
+resources:
+  dashboards:
+    customer_events_dashboard:
+      display_name: customer_events_dashboard_${bundle.target}
+      file_path: ../../resources/dashboards/dashboard.lvdash.json
+      warehouse_id: ${var.warehouse_id}
+      parent_path: /Shared/dashboards/${bundle.name}/${bundle.target}
+
+      permissions:
+        - level: CAN_MANAGE
+          user_name: ${var.owner_email}

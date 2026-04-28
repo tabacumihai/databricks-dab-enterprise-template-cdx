@@ -1,0 +1,36 @@
+x-job-clusters:
+  small_etl_cluster: &small_etl_cluster
+    job_cluster_key: small_etl_cluster
+    new_cluster:
+      spark_version: "15.4.x-scala2.12"
+      node_type_id: "Standard_DS3_v2"
+      autoscale:
+        min_workers: 1
+        max_workers: 4
+      runtime_engine: "PHOTON"
+      data_security_mode: "SINGLE_USER"
+      spark_conf:
+        spark.databricks.delta.optimizeWrite.enabled: "true"
+        spark.databricks.delta.autoCompact.enabled: "true"
+        spark.sql.adaptive.enabled: "true"
+      custom_tags:
+        template: "databricks-dab-enterprise-template"
+        workload: "etl"
+
+  medium_batch_cluster: &medium_batch_cluster
+    job_cluster_key: medium_batch_cluster
+    new_cluster:
+      spark_version: "15.4.x-scala2.12"
+      node_type_id: "Standard_DS4_v2"
+      autoscale:
+        min_workers: 2
+        max_workers: 8
+      runtime_engine: "PHOTON"
+      data_security_mode: "SINGLE_USER"
+      spark_conf:
+        spark.databricks.delta.optimizeWrite.enabled: "true"
+        spark.databricks.delta.autoCompact.enabled: "true"
+        spark.sql.adaptive.enabled: "true"
+      custom_tags:
+        template: "databricks-dab-enterprise-template"
+        workload: "batch"

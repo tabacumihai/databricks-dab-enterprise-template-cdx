@@ -1,0 +1,21 @@
+resources:
+  jobs:
+    customer_events_reporting:
+      name: customer_events_reporting_${bundle.target}
+
+      tags:
+        project: databricks-dab-enterprise-template
+        environment: ${bundle.target}
+        domain: reporting
+
+      permissions:
+        - level: CAN_MANAGE
+          user_name: ${var.owner_email}
+
+      queue:
+        enabled: true
+
+      tasks:
+        - task_key: refresh_dashboard
+          dashboard_task:
+            dashboard_id: ${resources.dashboards.customer_events_dashboard.id}

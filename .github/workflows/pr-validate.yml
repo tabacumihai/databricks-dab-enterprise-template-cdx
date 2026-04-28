@@ -1,0 +1,63 @@
+name: lint-test-validate
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Set up Databricks CLI
+        uses: databricks/setup-cli@main
+
+      - name: Install development dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Lint Python
+        run: |
+          ruff check .
+          black --check .
+
+      - name: Lint YAML
+        run: yamllint .
+
+      - name: Run unit tests
+        run: pytest
+
+      - name: Check forbidden files
+        shell: bash
+        run: |
+          git fetch origin main
+          CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
+          echo "$CHANGED_FILES"
+
+          echo "$CHANGED_FILES" | grep -E '(^|/)\.databrickscfg$|(^|/)\.env($|\.|/)|(^|/)\.bundle/|(^|/)\.databricks/' && {
+            echo "Forbidden local or secret files detected in PR."
+            exit 1
+          } || true
+
+      - name: Validate Databricks bundle
+        run: databricks bundle validate -t dev
